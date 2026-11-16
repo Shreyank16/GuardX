@@ -1,9 +1,9 @@
 <div align="center">
 
-<img src="assets/banner.svg" alt="GuardX - Real-Time SOC & Threat Telemetry Dashboard" width="100%"/>
+<img src="guardx/assets/banner.svg" alt="GuardX - Real-Time SOC & Threat Telemetry Dashboard" width="100%"/>
 
-<a href="https://github.com/your-org/guardx-dashboard">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&duration=3000&pause=900&color=00E5FF&center=true&vCenter=true&width=760&height=50&lines=Real-time+Wazuh+alerts+%E2%80%A2+live+triage;Endpoints+%E2%80%A2+FIM+%E2%80%A2+Windows+Auth+%E2%80%A2+PowerShell;4%2C514+detection+rules+%E2%80%A2+enriched+with+alert+history;Strict+TLS+%E2%80%A2+JWT+caching+%E2%80%A2+loopback-only+gateway" alt="Typing animation of GuardX features"/>
+<a href="https://github.com/yoga0061/guardx-dashboard">
+  <img src="guardx/assets/typing.svg" alt="Typing animation of GuardX features" width="800"/>
 </a>
 
 <br/>
@@ -16,19 +16,30 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 [![Tests](https://img.shields.io/badge/Tests-21%2F21%20passing-00e676.svg?style=for-the-badge)](#-testing--quality-assurance)
 
+<br/>
+
+[![Stars](https://img.shields.io/github/stars/yoga0061/guardx-dashboard?style=for-the-badge&color=ffd600&logo=github)](https://github.com/yoga0061/guardx-dashboard/stargazers)
+[![Forks](https://img.shields.io/github/forks/yoga0061/guardx-dashboard?style=for-the-badge&color=00b8d4&logo=github)](https://github.com/yoga0061/guardx-dashboard/network/members)
+[![Issues](https://img.shields.io/github/issues/yoga0061/guardx-dashboard?style=for-the-badge&color=ff5252&logo=github)](https://github.com/yoga0061/guardx-dashboard/issues)
+[![Last Commit](https://img.shields.io/github/last-commit/yoga0061/guardx-dashboard?style=for-the-badge&color=7c4dff&logo=git&logoColor=white)](https://github.com/yoga0061/guardx-dashboard/commits)
+[![Repo Size](https://img.shields.io/github/repo-size/yoga0061/guardx-dashboard?style=for-the-badge&color=00e676&logo=github)](https://github.com/yoga0061/guardx-dashboard)
+
 <p>
+  <a href="#-quick-start">Quick Start</a> •
   <a href="#-architecture-overview">Architecture</a> •
   <a href="#-key-modules--capabilities">Modules</a> •
   <a href="#-operating-modes">Modes</a> •
   <a href="#-installation">Install</a> •
   <a href="#-configuration">Configure</a> •
   <a href="#-api-specification">API</a> •
-  <a href="#-troubleshooting-guide">Troubleshooting</a>
+  <a href="#-troubleshooting-guide">Troubleshooting</a> •
+  <a href="#-roadmap">Roadmap</a> •
+  <a href="#-contributing">Contributing</a>
 </p>
 
 </div>
 
-<img src="assets/divider.svg" width="100%" height="6" alt=""/>
+<img src="guardx/assets/divider.svg" width="100%" height="6" alt=""/>
 
 **GuardX** is an enterprise-grade Security Operations Center (SOC) telemetry and incident analysis dashboard engineered for **Wazuh 4.14.7**. It bridges real-time security alerts, registered endpoint inventory, file integrity changes, Windows authentication events, PowerShell script block telemetry, and detection rules into a cohesive, high-performance web interface.
 
@@ -43,18 +54,49 @@
 > [!TIP]
 > No Wazuh cluster handy? Switch to **Demo mode** in Settings for a zero-network, fully simulated SOC you can explore instantly.
 
+## ✨ Why GuardX?
+
+| | |
+| :--- | :--- |
+| 🎯 **Focused** | One clean interface for alerts, endpoints, FIM, Windows logons, PowerShell and rules, instead of jumping between Wazuh views. |
+| 🔒 **Secure by design** | Browser never talks to Wazuh. A loopback-only gateway handles strict CA validation, JWT caching and credentials. |
+| 🧪 **Verified** | 21 / 21 integration tests cover every endpoint, filter and the Vite proxy. |
+| 🎭 **Demo-ready** | A built-in Demo mode needs no Wazuh cluster, ideal for presentations and training. |
+
+## ⚡ Quick Start
+
+```bash
+# 1. Clone
+git clone https://github.com/yoga0061/guardx-dashboard.git
+cd guardx-dashboard
+
+# 2. Install (frontend + backend)
+npm install
+cd backend && npm install && cd ..
+
+# 3. Configure credentials (see Configuration below)
+cp backend/.env.example backend/.env        # Windows PowerShell: copy backend\.env.example backend\.env
+
+# 4. Run (two terminals)
+cd backend && npm start                      # Terminal 1 -> http://127.0.0.1:4000
+npm run dev                                  # Terminal 2 -> http://localhost:5173
+```
+
+> [!NOTE]
+> Only want to look around? Run just `npm run dev` and choose **Demo** mode in Settings. No backend or Wazuh needed.
+
 <!-- 📸 Add a screenshot or GIF of your dashboard here:
-<p align="center"><img src="assets/dashboard-demo.gif" width="90%" alt="GuardX dashboard demo"/></p>
+<p align="center"><img src="guardx/guardx/assets/dashboard-demo.gif" width="90%" alt="GuardX dashboard demo"/></p>
 -->
 
-<img src="assets/divider.svg" width="100%" height="6" alt=""/>
+<img src="guardx/assets/divider.svg" width="100%" height="6" alt=""/>
 
 ## 🏛️ Architecture Overview
 
 GuardX uses a decoupled dual-tier architecture that keeps the browser, the intermediary security API gateway, and the Wazuh cluster strictly separated.
 
 <div align="center">
-  <img src="assets/architecture.svg" alt="Animated GuardX architecture diagram" width="100%"/>
+  <img src="guardx/assets/architecture.svg" alt="Animated GuardX architecture diagram" width="100%"/>
 </div>
 
 <details>
@@ -85,7 +127,7 @@ GuardX uses a decoupled dual-tier architecture that keeps the browser, the inter
 
 </details>
 
-<img src="assets/divider.svg" width="100%" height="6" alt=""/>
+<img src="guardx/assets/divider.svg" width="100%" height="6" alt=""/>
 
 ## 🧩 Key Modules & Capabilities
 
@@ -165,7 +207,7 @@ GuardX uses a decoupled dual-tier architecture that keeps the browser, the inter
 
 </details>
 
-<img src="assets/divider.svg" width="100%" height="6" alt=""/>
+<img src="guardx/assets/divider.svg" width="100%" height="6" alt=""/>
 
 ## 🎛️ Operating Modes
 
@@ -177,13 +219,13 @@ GuardX supports three flexible data operating modes configured in **Settings**:
 | 🟣 **Demo** | Realistic in-memory simulation | Zero external API calls | Presentations, UI training, offline demonstrations. |
 | ⚪ **Unconnected** | Catalog placeholders | Zero external API calls | Standalone review of catalog rules and static endpoints. |
 
-<img src="assets/divider.svg" width="100%" height="6" alt=""/>
+<img src="guardx/assets/divider.svg" width="100%" height="6" alt=""/>
 
 ## 🛠️ Technology Stack
 
 <div align="center">
 
-<img src="https://skillicons.dev/icons?i=react,vite,tailwind,nodejs,express,js&theme=dark" alt="Tech stack icons"/>
+<img src="guardx/assets/tech-stack.svg" alt="Technology stack icons" width="860"/>
 
 </div>
 
@@ -219,7 +261,7 @@ GuardX supports three flexible data operating modes configured in **Settings**:
 </tr>
 </table>
 
-<img src="assets/divider.svg" width="100%" height="6" alt=""/>
+<img src="guardx/assets/divider.svg" width="100%" height="6" alt=""/>
 
 ## 🚀 Installation
 
@@ -233,7 +275,7 @@ GuardX supports three flexible data operating modes configured in **Settings**:
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-org/guardx-dashboard.git
+git clone https://github.com/yoga0061/guardx-dashboard.git
 cd guardx-dashboard
 
 # Install frontend dependencies
@@ -245,7 +287,7 @@ npm install
 cd ..
 ```
 
-<img src="assets/divider.svg" width="100%" height="6" alt=""/>
+<img src="guardx/assets/divider.svg" width="100%" height="6" alt=""/>
 
 ## ⚙️ Configuration
 
@@ -297,7 +339,7 @@ WAZUH_ALLOW_SELF_SIGNED=false
 > [!CAUTION]
 > Never commit `backend/.env` or any file containing plaintext credentials or private keys to version control. Both `.env` and `backend/.env` are included in `.gitignore`.
 
-<img src="assets/divider.svg" width="100%" height="6" alt=""/>
+<img src="guardx/assets/divider.svg" width="100%" height="6" alt=""/>
 
 ## ▶️ Starting the Application
 
@@ -333,7 +375,7 @@ npm run build
 npm run preview
 ```
 
-<img src="assets/divider.svg" width="100%" height="6" alt=""/>
+<img src="guardx/assets/divider.svg" width="100%" height="6" alt=""/>
 
 ## 📡 API Specification
 
@@ -350,7 +392,7 @@ All endpoints are hosted by the backend gateway on `http://127.0.0.1:4000` and p
 | `/api/powershell` | `GET` | `range`, `agent`, `search`, `limit`, `offset` | PowerShell Script Block execution (Event ID 4104) alert telemetry. |
 | `/api/rules` | `GET` | `ruleId`, `severity`, `search`, `limit`, `offset` | Configured Wazuh detection rules enriched with historical alert counts. |
 
-<img src="assets/divider.svg" width="100%" height="6" alt=""/>
+<img src="guardx/assets/divider.svg" width="100%" height="6" alt=""/>
 
 ## ✅ Testing & Quality Assurance
 
@@ -390,7 +432,7 @@ npm run lint
 npm run build
 ```
 
-<img src="assets/divider.svg" width="100%" height="6" alt=""/>
+<img src="guardx/assets/divider.svg" width="100%" height="6" alt=""/>
 
 ## 📌 Operational Scope & Known Behaviors
 
@@ -400,7 +442,7 @@ npm run build
 
 3. **Strict TLS Enforcement** — Self-signed certificates without an explicit CA are rejected with `UNABLE_TO_VERIFY_LEAF_SIGNATURE`. Always supply your cluster's CA bundle via `WAZUH_CA_CERT_PATH`.
 
-<img src="assets/divider.svg" width="100%" height="6" alt=""/>
+<img src="guardx/assets/divider.svg" width="100%" height="6" alt=""/>
 
 ## 🩺 Troubleshooting Guide
 
@@ -418,7 +460,75 @@ npm run build
 
 </details>
 
-<img src="assets/divider.svg" width="100%" height="6" alt=""/>
+<img src="guardx/assets/divider.svg" width="100%" height="6" alt=""/>
+
+## 🗺️ Roadmap
+
+> Ideas for future work. Edit this list to match your real plans.
+
+- [x] Live alerts, endpoints, FIM, authentication, PowerShell and rules modules
+- [x] Strict CA validation and automatic JWT refresh
+- [x] Live, Demo and Unconnected operating modes
+- [ ] Docker Compose setup for one-command deployment
+- [ ] Wazuh Archives (`wazuh-archives-*`) ingestion for raw PowerShell telemetry
+- [ ] Export alerts and rules to CSV / PDF
+- [ ] Role-based dashboard login
+- [ ] Light / dark theme toggle
+
+<img src="guardx/assets/divider.svg" width="100%" height="6" alt=""/>
+
+## 🤝 Contributing
+
+Contributions, issues and feature ideas are welcome.
+
+1. **Fork** the repo and create a branch: `git checkout -b feature/my-feature`
+2. Make your changes and run the checks:
+   ```bash
+   npm run lint
+   npm run build
+   node scratch/run-integration-tests.js
+   ```
+3. **Commit** with a clear message and push your branch.
+4. Open a **Pull Request** describing what changed and why.
+
+Found a bug? [Open an issue](https://github.com/yoga0061/guardx-dashboard/issues/new) with steps to reproduce, your Wazuh version and relevant backend logs (with credentials removed).
+
+## 🔐 Security
+
+- Never commit `.env`, `backend/.env`, private keys or CA bundles.
+- If you find a vulnerability, please **do not** open a public issue. Use [GitHub Security Advisories](https://github.com/yoga0061/guardx-dashboard/security/advisories/new) to report it privately.
+
+<img src="guardx/assets/divider.svg" width="100%" height="6" alt=""/>
+
+## 👤 Author
+
+<table>
+<tr>
+<td align="center" width="160">
+  <a href="https://github.com/yoga0061">
+    <img src="https://github.com/yoga0061.png?size=120" width="100" alt="yoga0061" style="border-radius:50%"/>
+  </a>
+</td>
+<td>
+
+**Yoga** — [@yoga0061](https://github.com/yoga0061)
+
+Built GuardX to bring Wazuh telemetry into one fast, secure SOC dashboard.
+
+[![GitHub](https://img.shields.io/badge/GitHub-yoga0061-181717?style=for-the-badge&logo=github)](https://github.com/yoga0061)
+[![Follow](https://img.shields.io/github/followers/yoga0061?label=Follow&style=for-the-badge&logo=github&color=00b8d4)](https://github.com/yoga0061)
+
+</td>
+</tr>
+</table>
+
+## ⭐ Star History
+
+<a href="https://github.com/yoga0061/guardx-dashboard/stargazers">
+  <img src="https://api.star-history.com/svg?repos=yoga0061/guardx-dashboard&type=Date" alt="Star history chart" width="640"/>
+</a>
+
+<img src="guardx/assets/divider.svg" width="100%" height="6" alt=""/>
 
 ## 📄 License
 
@@ -428,8 +538,8 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 
 <br/>
 
-**If GuardX helps your SOC, consider giving it a ⭐**
+**If GuardX helps your SOC, consider giving it a ⭐**<br/>Made with 🛡️ by [yoga0061](https://github.com/yoga0061)
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0b2233,50:00b8d4,100:7c4dff&height=120&section=footer" width="100%" alt=""/>
+<img src="guardx/assets/footer.svg" width="100%" alt=""/>
 
 </div>
