@@ -1,0 +1,339 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "IBM Plex Sans", "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", Consolas, monospace;
+  --color-canvas: #0c0e11;
+  --color-sidebar: #090b0d;
+  --color-panel: #12151a;
+  --color-panel-2: #181c22;
+  --color-line: #2a3038;
+  --color-line-soft: #22272e;
+  --color-ink: #c5cad1;
+  --color-ink-strong: #eceff3;
+  --color-muted: #8e969f;
+  --color-faint: #66707a;
+  --color-accent: #3e8f64;
+  --color-accent-2: #b7dcc8;
+  --color-accent-soft: #173026;
+  --color-critical: #c85a5a;
+  --color-high: #d08a45;
+  --color-medium: #c9a45d;
+  --color-low: #7393ad;
+  --color-info: #8e969f;
+  --color-warn: #b08a3e;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 1.45;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  min-height: 100%;
+  text-align: left;
+  border: 0;
+  display: block;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #3a424c transparent;
+}
+
+:focus-visible {
+  outline: 1px solid var(--color-accent);
+  outline-offset: 1px;
+}
+
+input,
+select,
+textarea,
+button {
+  color-scheme: dark;
+  font-family: inherit;
+}
+
+::selection {
+  background: #234634;
+  color: #f3f7f4;
+}
+
+@layer components {
+  .gx-field {
+    height: 30px;
+    width: 100%;
+    border: 1px solid var(--color-line);
+    background: #0e1114;
+    color: var(--color-ink-strong);
+    padding: 0 8px;
+    font-size: 12px;
+    outline: none;
+  }
+
+  .gx-field:focus {
+    border-color: #3d6e52;
+  }
+
+  .gx-area {
+    width: 100%;
+    min-height: 108px;
+    resize: vertical;
+    border: 1px solid var(--color-line);
+    background: #0e1114;
+    color: var(--color-ink-strong);
+    padding: 8px;
+    font-size: 12px;
+    line-height: 1.5;
+    outline: none;
+  }
+
+  .gx-area:focus {
+    border-color: #3d6e52;
+  }
+
+  .gx-btn {
+    display: inline-flex;
+    height: 30px;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border: 1px solid var(--color-line);
+    background: #161b20;
+    padding: 0 10px;
+    color: var(--color-ink);
+    font-size: 12px;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+
+  .gx-btn:hover {
+    background: #1d242b;
+    color: var(--color-ink-strong);
+  }
+
+  .gx-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+  }
+
+  .gx-btn-primary {
+    border-color: #2c6848;
+    background: #173226;
+    color: #d7efe3;
+  }
+
+  .gx-btn-primary:hover {
+    background: #1c3c2d;
+  }
+
+  .gx-label {
+    display: block;
+    margin-bottom: 4px;
+    color: var(--color-faint);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+}
+
+/* ─── Layout animations ───────────────────────────────────────────────────── */
+
+@keyframes gx-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes gx-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.25; }
+}
+
+/* ─── Layout shell & navigation components ───────────────────────────────── */
+
+@layer components {
+
+  /* ── Responsive visibility ── */
+
+  .gx-mobile-only {
+    display: none;
+  }
+
+  .gx-desktop-only {
+    display: flex;
+  }
+
+  @media (max-width: 767px) {
+    .gx-mobile-only  { display: flex; }
+    .gx-desktop-only { display: none; }
+  }
+
+  /* ── Sidebar ── */
+
+  .gx-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 220px;
+    background: var(--color-sidebar);
+    border-right: 1px solid var(--color-line);
+    z-index: 40;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: width 200ms ease;
+  }
+
+  .gx-sidebar-collapsed {
+    width: 52px;
+  }
+
+  /* Centre icons when collapsed */
+  .gx-sidebar-collapsed .gx-nav-item {
+    justify-content: center;
+    padding: 0;
+  }
+
+  .gx-sidebar-collapsed .gx-nav-section-label {
+    text-align: center;
+    padding: 10px 0 3px;
+  }
+
+  /* Mobile: sidebar slides in from the left as an overlay */
+  @media (max-width: 767px) {
+    .gx-sidebar {
+      transform: translateX(-100%);
+      transition: transform 220ms ease;
+      width: 220px;   /* always full width on mobile */
+      z-index: 50;
+    }
+
+    .gx-sidebar-mobile-open {
+      transform: translateX(0);
+    }
+  }
+
+  /* ── Main content area ── */
+
+  .gx-shell-main {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin-left: 220px;
+    transition: margin-left 200ms ease;
+    overflow: hidden;
+  }
+
+  .gx-shell-main-collapsed {
+    margin-left: 52px;
+  }
+
+  @media (max-width: 767px) {
+    /* Sidebar is an overlay — no margin offset on mobile */
+    .gx-shell-main,
+    .gx-shell-main-collapsed {
+      margin-left: 0;
+    }
+  }
+
+  /* ── Top bar ── */
+
+  .gx-topbar {
+    height: 44px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 16px;
+    background: var(--color-sidebar);
+    border-bottom: 1px solid var(--color-line);
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+
+  /* ── Sidebar navigation items ── */
+
+  .gx-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 32px;
+    padding: 0 14px;
+    width: 100%;
+    box-sizing: border-box;
+
+    color: var(--color-muted);
+    font-size: 12px;
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+
+    /* Reset button defaults, add left accent line */
+    background: none;
+    border: none;
+    border-left: 2px solid transparent;
+    outline: none;
+    cursor: pointer;
+
+    transition: background 150ms ease, color 150ms ease;
+  }
+
+  .gx-nav-item:hover {
+    color: var(--color-ink);
+    background: var(--color-panel);
+  }
+
+  .gx-nav-item-active {
+    color: var(--color-accent-2);
+    background: var(--color-accent-soft);
+    border-left-color: var(--color-accent);
+  }
+
+  .gx-nav-item-active:hover {
+    color: var(--color-accent-2);
+    background: var(--color-accent-soft);
+  }
+
+  /* ── Sidebar nav section wrappers ── */
+
+  .gx-nav-section {
+    margin-bottom: 2px;
+  }
+
+  .gx-nav-section-label {
+    padding: 10px 14px 3px;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-faint);
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  /* ── Utility animations ── */
+
+  .gx-spin {
+    animation: gx-spin 0.8s linear infinite;
+  }
+
+  .gx-pulse {
+    animation: gx-pulse 1.4s ease-in-out infinite;
+  }
+}
