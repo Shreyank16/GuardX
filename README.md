@@ -2,7 +2,7 @@
 
 <img src="assets/banner.svg" width="100%" alt="GuardX security monitoring dashboard"/>
 
-<img src="guardx/assets/typing.svg" width="100%" alt="GuardX capabilities"/>
+<img src="assets/typing.svg" width="100%" alt="GuardX capabilities"/>
 
 [![Wazuh](https://img.shields.io/badge/Wazuh-4.14.7-2563eb?style=for-the-badge)](https://wazuh.com/)
 [![React](https://img.shields.io/badge/React-19-61dafb?style=for-the-badge&logo=react)](https://react.dev/)
