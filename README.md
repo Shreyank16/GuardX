@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="guardx/assets/banner.svg" width="100%" alt="GuardX security monitoring dashboard"/>
+<img src="assets/banner.svg" width="100%" alt="GuardX security monitoring dashboard"/>
 
 <img src="guardx/assets/typing.svg" width="100%" alt="GuardX capabilities"/>
 
@@ -20,7 +20,7 @@
 
 </div>
 
-<img src="guardx/assets/divider.svg" width="100%" alt=""/>
+<img src="assets/divider.svg" width="100%" alt=""/>
 
 ## 🛡️ About GuardX
 
@@ -104,14 +104,14 @@ npm run dev
 
 Open the local URL printed by Vite, normally `http://localhost:5173`.
 
-<img src="guardx/assets/divider.svg" width="100%" alt=""/>
+<img src="assets/divider.svg" width="100%" alt=""/>
 
 ## 🏛️ Architecture
 
 GuardX separates the browser interface from the Wazuh integration layer. The browser calls the GuardX API; the backend communicates with Wazuh Manager and Wazuh Indexer.
 
 <div align="center">
-<img src="guardx/assets/architecture.svg" width="100%" alt="GuardX architecture"/>
+<img src="assets/architecture.svg" width="100%" alt="GuardX architecture"/>
 </div>
 
 <details>
@@ -132,7 +132,7 @@ GuardX Backend (Node.js + Express)
 
 ## 🧰 Technology stack
 
-<img src="guardx/assets/tech-stack.svg" width="100%" alt="GuardX technology stack"/>
+<img src="assets/tech-stack.svg" width="100%" alt="GuardX technology stack"/>
 
 | Layer | Technologies |
 |---|---|
@@ -193,7 +193,7 @@ GEMINI_MODEL=gemini-2.5-flash
 
 Adjust URLs and certificate paths to match your environment. Keep TLS verification enabled and provide the correct CA certificate rather than disabling certificate checks.
 
-<img src="guardx/assets/divider.svg" width="100%" alt=""/>
+<img src="assets/divider.svg" width="100%" alt=""/>
 
 ## 🔌 Backend API
 
